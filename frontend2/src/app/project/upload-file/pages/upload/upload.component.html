@@ -1,0 +1,75 @@
+<p>upload works!</p>
+<div class="card">
+    <div class="context" [formGroup]="form">
+        <div class="flightNo">
+            <div>
+                <span>Flight no </span><span class="require">*</span>
+            </div>
+            <div class="input">
+                <div>
+                    <mat-form-field class="input" appearance="outline" [ngClass]="{'error-border': form.get('flightNo')?.invalid && (form.get('flightNo')?.dirty || form.get('flightNo')?.touched)}">
+                        <input matInput maxlength="256" formControlName="flightNo" (input)="toUpperCase('flightNo')" />
+                    </mat-form-field>
+                </div>
+                @if (form.get('flightNo')?.invalid && (form.get('flightNo')?.dirty || form.get('flightNo')?.touched) && !form.get('flightNo')?.errors?.['pattern']) {
+                   <div class="require">
+                        <span>This field is require</span>
+                    </div> 
+                }
+                @if (form.get('flightNo')?.errors?.['pattern']) {
+                    <div class="require">
+                         <span>Invalid flight no format</span>
+                     </div> 
+                }
+            </div>
+        </div>
+        <div class="browse">
+            <div>
+                <span>CSV file </span><span class="require">*</span>
+            </div>
+            <div class="input">
+                <div class="browsebtn">
+                    <input type="file" style="display: none;" accept=".csv" #fileInput (change)="onFileSelected($event)" />
+                    <button 
+                    mat-raised-button
+                    (click)="onClickFileInputButton()"
+                    >
+                        <mat-icon>attach_file</mat-icon>
+                        Browse
+                    </button>
+                </div>
+                <div>
+                    @if (form.get('file')?.invalid && (form.get('file')?.dirty || form.get('file')?.touched)) {
+                        <div class="require">
+                            <span>This field is require</span>
+                        </div> 
+                    }
+                </div>
+            </div>
+            @if (form.get('file')?.value?.name) {
+                <div class="file-name">
+                    <mat-icon>attach_file</mat-icon>
+                    <span>{{ form.get('file')?.value?.name }}</span>
+                </div>
+            } 
+        </div>
+    </div>
+    <div class="save">
+        <div class="savebtn">
+            <button 
+            mat-raised-button 
+            (click)="save()"
+            >
+                Save
+            </button>
+        </div>
+        <div class="cancelbtn">
+            <button 
+            mat-raised-button 
+            (click)="cancel()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
