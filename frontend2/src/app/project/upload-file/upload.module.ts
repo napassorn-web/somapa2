@@ -8,18 +8,22 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { UploadRoutingModule } from './upload-routing.module';
 import { UploadComponent } from './pages/upload/upload.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ResultComponent } from './components/result/result.component';
+import { TableResultComponent } from './components/table-result/table-result.component';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 
 @NgModule({
   declarations: [
     UploadComponent,
-    ResultComponent
+    ResultComponent,
+    TableResultComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,9 @@ import { ResultComponent } from './components/result/result.component';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
+    MatDatepickerModule,
     UploadRoutingModule
-  ]
+  ],
+  providers: [provideNativeDateAdapter()],
 })
 export class UploadModule { }

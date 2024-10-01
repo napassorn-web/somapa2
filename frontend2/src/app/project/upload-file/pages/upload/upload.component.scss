@@ -14,7 +14,6 @@
 .context {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
     gap: 115px;
 }
@@ -30,26 +29,10 @@
         .require {
             font-size: 12px;
         }
-        .error-border {
-            ::ng-deep .mdc-notched-outline > * {
-                border: 1px solid red !important;
-                border-radius: 5px;
-            }
-        }
-    }
-    ::ng-deep .mdc-notched-outline > * {
-        border: 1px solid #0097a7 !important;
-        border-radius: 5px;
     }
     ::ng-deep .mat-mdc-form-field-subscript-wrapper {
         display: none;
     }
-    ::ng-deep .mdc-notched-outline__leading {
-        display: none;
-    }
-    ::ng-deep .mat-mdc-text-field-wrapper {
-        padding: 3px;
-    }      
 }
 
 
@@ -68,12 +51,10 @@
 }
 
 .browsebtn {
-    display: flex;
-    background: #0097a7;
-    flex-direction: row;
-    color: white;
-    height: 30px;
-    border-radius: 5px;
+    ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+        background-color: #0097a7 !important;
+        color: white !important;
+    }
 }
 
 .file-name {
@@ -88,25 +69,30 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 25px;
+    gap: 3px;
 }
 
 .savebtn {
     display: flex;
-    background: #0097a7;
     color: white;
     align-items: center;
     padding: 12px;
     border-radius: 10px;
+    ::ng-deep .mat-mdc-unelevated-button:not(:disabled) {
+        background-color: #0097a7 !important;
+    }   
+
 }
 
 .cancelbtn {
     display: flex;
-    background: #eeeeee;
-    color: black;
     align-items: center;
     padding: 12px;
     border-radius: 10px;
+    ::ng-deep .mat-mdc-unelevated-button:not(:disabled) {
+        background-color: #eeeeee !important;
+        color: black !important;
+    }
 }
 
 ::ng-deep .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {

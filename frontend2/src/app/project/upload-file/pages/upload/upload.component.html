@@ -1,13 +1,12 @@
-<p>upload works!</p>
 <div class="card">
-    <div class="context" [formGroup]="form">
-        <div class="flightNo">
+    <div class="context row" [formGroup]="form">
+        <div class="flightNo col-6">
             <div>
                 <span>Flight no </span><span class="require">*</span>
             </div>
             <div class="input">
                 <div>
-                    <mat-form-field class="input" appearance="outline" [ngClass]="{'error-border': form.get('flightNo')?.invalid && (form.get('flightNo')?.dirty || form.get('flightNo')?.touched)}">
+                    <mat-form-field class="input" appearance="outline">
                         <input matInput maxlength="256" formControlName="flightNo" (input)="toUpperCase('flightNo')" />
                     </mat-form-field>
                 </div>
@@ -23,7 +22,7 @@
                 }
             </div>
         </div>
-        <div class="browse">
+        <div class="browse col-6">
             <div>
                 <span>CSV file </span><span class="require">*</span>
             </div>
@@ -57,7 +56,7 @@
     <div class="save">
         <div class="savebtn">
             <button 
-            mat-raised-button 
+            mat-flat-button
             (click)="save()"
             >
                 Save
@@ -65,7 +64,7 @@
         </div>
         <div class="cancelbtn">
             <button 
-            mat-raised-button 
+            mat-flat-button
             (click)="cancel()"
             >
                 Cancel
@@ -73,3 +72,18 @@
         </div>
     </div>
 </div>
+
+@if(showResult) {
+    <div class="card">
+        @if (showData) {
+            <app-result
+            ></app-result>
+        }
+        <div class="table">
+          <app-table-result
+            [result]="result"
+            (onEdit)="onEdit($event)" 
+          ></app-table-result>
+        </div>
+    </div>
+}

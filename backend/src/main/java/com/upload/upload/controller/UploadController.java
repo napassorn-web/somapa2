@@ -28,80 +28,34 @@ public class UploadController {
 	@Autowired
 	private UploadService service;
 	
-	@GetMapping("/greet")
-	public String greet() {
-		return "Hello my lovely";
-	}
-	
-//	@PostMapping("/upload")
-//	public ResponseEntity<?> upload(
-//	        @RequestParam("flightNo") String flightNo,
-//	        @RequestParam("file") MultipartFile file) {
-//	    	Response response = null;
-//	    try {
-//	        UploadRequest uploadRequest = new UploadRequest();
-//	        uploadRequest.setFlightNo(flightNo);
-//	        
-//	        FileDetail fileDetail = new FileDetail();
-//	        fileDetail.setFile(file);
-//	        fileDetail.setName(file.getOriginalFilename());
-//	        fileDetail.setSize(file.getSize());
-//	        fileDetail.setType(file.getContentType());
-//
-//	        uploadRequest.setFile(fileDetail);
-//
-//	        Response response = service.upload(uploadRequest);
-//
-//	        return ResponseEntity.ok(response);
-//	    } catch (InvalidFileException e) {
-//	    	Map<String, Object> errorResponse = new HashMap<>();
-//	        errorResponse.put("messageCode", e.getMessageCode());
-//	        errorResponse.put("messageDesc", e.getMessageDesc());
-//	        errorResponse.put("data", e.getData());
-//
-//	        return ResponseEntity.badRequest().body(errorResponse);
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
-//	    }
-//	}
-	
 	@PostMapping("/upload")
 	public ResponseEntity<?> upload(
 	        @RequestParam("flightNo") String flightNo,
 	        @RequestParam("file") MultipartFile file) {
 	    try {
-	        // สร้าง UploadRequest และตั้งค่า flightNo
 	        UploadRequest uploadRequest = new UploadRequest();
 	        uploadRequest.setFlightNo(flightNo);
 
-	        // สร้าง FileDetail และตั้งค่าไฟล์
 	        FileDetail fileDetail = new FileDetail();
 	        fileDetail.setFile(file);
 	        fileDetail.setName(file.getOriginalFilename());
 	        fileDetail.setSize(file.getSize());
 	        fileDetail.setType(file.getContentType());
 
-	        // ตั้งค่า FileDetail ลงใน UploadRequest
 	        uploadRequest.setFile(fileDetail);
 
-	        // เรียกใช้ service เพื่อ validate request และ validate ไฟล์ CSV
 	        Response response = service.upload(uploadRequest);
 
-	        // ส่ง response กลับไปยัง client
 	        return ResponseEntity.ok(response);
 
 	    } catch (InvalidFileException e) {
-	        // สร้าง error response สำหรับ InvalidFileException
 	        Map<String, Object> errorResponse = new HashMap<>();
 	        errorResponse.put("messageCode", e.getMessageCode());
 	        errorResponse.put("messageDesc", e.getMessageDesc());
 	        errorResponse.put("data", e.getData());
 
 	        return ResponseEntity.badRequest().body(errorResponse);
-
 	    } catch (Exception e) {
-	        // จัดการข้อผิดพลาดทั่วไป
 	        e.printStackTrace();
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
 	    }

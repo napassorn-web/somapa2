@@ -1,0 +1,52 @@
+.require {
+    color: red;
+    position: relative;
+    top: -5px;
+    right: 0px;
+}
+
+.context {
+    display: flex;
+    flex-direction: column;
+    .row1 {
+        display: flex;
+        flex-direction: row;
+        .first-name {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .last-name {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+    }
+    .row2 {
+        display: flex;
+        flex-direction: row;
+        
+        .gender {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .date {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+    }
+    .row3 {
+        display: flex;
+        flex-direction: row;
+    }
+    .row4 {
+        .save {
+            display: flex;
+            justify-content: flex-end;
+            padding: 22px;
+            gap: 20px;
+        }
+    }
+}

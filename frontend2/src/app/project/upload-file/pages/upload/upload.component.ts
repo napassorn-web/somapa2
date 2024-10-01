@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { UploadService } from '../../services/upload.service';
 import { map, Subject, take, takeUntil } from 'rxjs';
 import { uploadFileResponse } from '../../models/ีuploadFileResponse';
+import { data } from '../../models/data';
 
 
 @Component({
@@ -22,7 +23,13 @@ export class UploadComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput: any;
   file!: any;
   form!: FormGroup;
+  resultFormGroup!: FormGroup;
   FILE_MAXSIZE = 1048576;
+
+  showResult: boolean = false;
+  showData: boolean = false;
+  result!: data[];
+
   ngOnInit(): void {
     this.browseFIleForm();
   }
@@ -87,8 +94,10 @@ export class UploadComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe((resp: uploadFileResponse) => {
           if (resp.messageCode === 200) {
-
-          }
+            this.showResult = true;
+            this.showData = true;
+            this.result = resp.data;            
+          } else this.showResult = false;
         })   
     } else {
         this.form.markAllAsTouched(); 
@@ -117,6 +126,12 @@ export class UploadComponent implements OnInit, OnDestroy {
 
     if (this.fileInput) { 
       this.fileInput.nativeElement.value = '';
+    }
+  }
+
+  onEdit(data: boolean): void {
+    if (!data) {
+      this.showData = false;
     }
   }
 }
