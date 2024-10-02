@@ -1,6 +1,6 @@
 <div class="card">
-    <div class="context row" [formGroup]="form">
-        <div class="flightNo col-6">
+    <div class="context" [formGroup]="form">
+        <div class="flightNo">
             <div>
                 <span>Flight no </span><span class="require">*</span>
             </div>
@@ -22,7 +22,7 @@
                 }
             </div>
         </div>
-        <div class="browse col-6">
+        <div class="browse">
             <div>
                 <span>CSV file </span><span class="require">*</span>
             </div>
@@ -53,6 +53,13 @@
             } 
         </div>
     </div>
+    @if (errorMessage) {
+        <div class="require">
+            @for (error of errorMessage; track $index) {
+                <span>{{'Row ' + error.row + ' Invalid: ' + error.columnInvalid}}</span>
+            }
+        </div>
+        }
     <div class="save">
         <div class="savebtn">
             <button 
@@ -72,18 +79,3 @@
         </div>
     </div>
 </div>
-
-@if(showResult) {
-    <div class="card">
-        @if (showData) {
-            <app-result
-            ></app-result>
-        }
-        <div class="table">
-          <app-table-result
-            [result]="result"
-            (onEdit)="onEdit($event)" 
-          ></app-table-result>
-        </div>
-    </div>
-}

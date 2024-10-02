@@ -6,10 +6,15 @@
                 <mat-form-field class="input" appearance="outline">
                     <input matInput maxlength="20" formControlName="firstName" />
                 </mat-form-field>
-                @if (form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)) {
+                @if (form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched) && !form.get('firstName')?.errors?.['pattern']) {
                     <div class="require">
                         <span>This field is require</span>
                     </div> 
+                }
+                @if (form.get('firstName')?.errors?.['pattern']) {
+                    <div class="require">
+                         <span>Invalid First name</span>
+                     </div> 
                 }
             </div>
         </div>
@@ -21,10 +26,15 @@
                         <input matInput maxlength="20" formControlName="lastName" />
                     </mat-form-field>
                 </div>
-                @if (form.get('lastName')?.invalid && (form.get('lastName')?.dirty || form.get('lastName')?.touched)) {
+                @if (form.get('lastName')?.invalid && (form.get('lastName')?.dirty || form.get('lastName')?.touched) && !form.get('firstName')?.errors?.['pattern']) {
                     <div class="require">
                         <span>This field is require</span>
                     </div> 
+                }
+                @if (form.get('lastName')?.errors?.['pattern']) {
+                    <div class="require">
+                         <span>Invalid Last name</span>
+                     </div> 
                 }
             </div>
         </div>
@@ -99,4 +109,10 @@
             </div>
         </div>
     </div>
+</div>
+<div class="table">
+    <app-table-result
+      [responseData]="responseData"
+      (onEdit)="onEdit($event)"
+    ></app-table-result>
 </div>

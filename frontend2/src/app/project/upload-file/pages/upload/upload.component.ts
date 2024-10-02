@@ -5,6 +5,7 @@ import { UploadService } from '../../services/upload.service';
 import { map, Subject, take, takeUntil } from 'rxjs';
 import { uploadFileResponse } from '../../models/ีuploadFileResponse';
 import { data } from '../../models/data';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class UploadComponent implements OnInit, OnDestroy {
   constructor(
     protected formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private service: UploadService
+    private service: UploadService,
+    private router: Router
   ){}
   destroy$: Subject<any> = new Subject();
   
@@ -29,6 +31,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   showResult: boolean = false;
   showData: boolean = false;
   result!: data[];
+  errorMessage: any;
 
   ngOnInit(): void {
     this.browseFIleForm();
@@ -94,10 +97,12 @@ export class UploadComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe((resp: uploadFileResponse) => {
           if (resp.messageCode === 200) {
-            this.showResult = true;
-            this.showData = true;
-            this.result = resp.data;            
-          } else this.showResult = false;
+            this.service.setData(resp?.data);
+            this.router.navigate(['upload/result']);
+          } else {
+            this.showResult = false;
+            this.errorMessage = resp.data; 
+          }
         })   
     } else {
         this.form.markAllAsTouched(); 

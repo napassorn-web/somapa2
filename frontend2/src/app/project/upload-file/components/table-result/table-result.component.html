@@ -1,9 +1,3 @@
-@if(editData) {
-    <app-result
-        [result]="editResult"
-        (saveData)="onSaveData($event)"
-    ></app-result>
-}
 <div>
     <table mat-table [dataSource]="dataSourceTable" class="mat-elevation-z8">
         <ng-container matColumnDef="No">
@@ -52,4 +46,12 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div class="cancelbtn">
+        <button 
+        mat-flat-button
+        (click)="cancel()"
+        >
+            Cancel
+        </button>
+    </div>
 </div>

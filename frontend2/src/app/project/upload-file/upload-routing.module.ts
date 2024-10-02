@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UploadComponent } from './pages/upload/upload.component';
+import { ResultComponent } from './components/result/result.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UploadComponent
+  },
+  {
+    path: 'result',
+    component: ResultComponent,
   }
 ];
 
