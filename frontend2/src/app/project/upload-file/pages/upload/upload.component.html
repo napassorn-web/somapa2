@@ -54,7 +54,7 @@
         </div>
     </div>
     @if (errorMessage) {
-        <div class="require">
+        <div class="msgerror">
             @for (error of errorMessage; track $index) {
                 <span>{{'Row ' + error.row + ' Invalid: ' + error.columnInvalid}}</span>
             }

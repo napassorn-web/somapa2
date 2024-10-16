@@ -38,8 +38,11 @@
         }
     }
     .row3 {
-        display: flex;
-        flex-direction: row;
+        .nationality {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
     }
     .row4 {
         .save {

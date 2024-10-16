@@ -70,6 +70,13 @@ export class ResultComponent implements OnInit, OnDestroy {
     return null;
   }
 
+  toUpperCase(controlName: string): void {
+    const control = this.form.get(controlName);
+    if (control) {
+        control.setValue(control.value.toUpperCase());
+    }
+  }
+
   save(): void {
     if (this.form.valid) {
       const updatedData = this.form.value as data;

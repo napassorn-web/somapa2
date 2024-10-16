@@ -19,6 +19,13 @@
     gap: 115px;
 }
 
+.msgerror {
+    color: red;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+
 .flightNo {
     display: flex;
     flex-direction: row;

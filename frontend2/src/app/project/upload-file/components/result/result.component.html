@@ -42,33 +42,39 @@
     <div class="row2">
         <div class="gender">
             <span>Gender </span><span class="require">*</span>
-            <mat-form-field>
-                <mat-select formControlName="gender">
-                    <mat-option value=""></mat-option>
-                    <mat-option value="Male">Male</mat-option>
-                    <mat-option value="Female">Female</mat-option>
-                    <mat-option value="Unknown">Unknown</mat-option>
-                </mat-select>
-                </mat-form-field>
-                @if (form.get('gender')?.invalid && (form.get('gender')?.dirty || form.get('gender')?.touched)) {
-                    <div class="require">
-                         <span>This field is require</span>
-                     </div> 
-                 }
+            <div class="input">
+
+                <mat-form-field>
+                    <mat-select formControlName="gender">
+                        <mat-option value=""></mat-option>
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Female">Female</mat-option>
+                        <mat-option value="Unknown">Unknown</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                    @if (form.get('gender')?.invalid && (form.get('gender')?.dirty || form.get('gender')?.touched)) {
+                        <div class="require">
+                             <span>This field is require</span>
+                         </div> 
+                    }
+            </div>
         </div>
         <div class="date">
             <span>Date of birth </span><span class="require">*</span>
-            <mat-form-field>
-                <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" [max]="maxDate">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            @if (form.get('dateOfBirth')?.invalid && (form.get('dateOfBirth')?.dirty || form.get('dateOfBirth')?.touched)) {
-                <div class="require">
-                     <span>This field is require</span>
-                 </div> 
-             }
+            <div class="input">
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" [max]="maxDate">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                @if (form.get('dateOfBirth')?.invalid && (form.get('dateOfBirth')?.dirty || form.get('dateOfBirth')?.touched)) {
+                    <div class="require">
+                         <span>This field is require</span>
+                     </div> 
+                }
+            </div>
         </div>
     </div>
     <div class="row3">
@@ -77,7 +83,7 @@
                 <div class="input">
                     <div>
                         <mat-form-field class="input" appearance="outline">
-                            <input matInput maxlength="3" formControlName="nationality" />
+                            <input matInput maxlength="3" formControlName="nationality" (input)="toUpperCase('nationality')" />
                         </mat-form-field>
                     </div>
                     @if (form.get('nationality')?.invalid && (form.get('nationality')?.dirty || form.get('nationality')?.touched)) {

@@ -6,6 +6,7 @@ import { map, Subject, take, takeUntil } from 'rxjs';
 import { uploadFileResponse } from '../../models/ีuploadFileResponse';
 import { data } from '../../models/data';
 import { Router } from '@angular/router';
+import { errorMessage } from '../../models/errorMessage';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   showResult: boolean = false;
   showData: boolean = false;
   result!: data[];
-  errorMessage: any;
+  errorMessage!: errorMessage[];
 
   ngOnInit(): void {
     this.browseFIleForm();
@@ -132,6 +133,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     if (this.fileInput) { 
       this.fileInput.nativeElement.value = '';
     }
+    this.errorMessage = [];
   }
 
   onEdit(data: boolean): void {
